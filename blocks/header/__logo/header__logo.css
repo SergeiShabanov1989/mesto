@@ -1,1 +1,3 @@
-.header__logo {}
+.header__logo {
+  object-fit: cover;
+}
