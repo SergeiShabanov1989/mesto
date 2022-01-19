@@ -5,8 +5,6 @@
   background-color: rgba(0, 0, 0, .0);
   border: 0;
   padding: 0;
-  width: 32px;
-  height: 32px;
   cursor: pointer;
   transition: opacity .3s;
 }
@@ -17,8 +15,6 @@
 
 @media screen and (max-width: 1023px) {
   .popup__close-btn {
-    width: 25px;
-    height: 25px;
     top: -30px;
     right: -30px;
   }
@@ -26,8 +22,6 @@
 
 @media screen and (max-width: 767px) {
   .popup__close-btn {
-    width: 20px;
-    height: 20px;
     top: -30px;
     right: 0px;
   }
