@@ -33,5 +33,4 @@
 
 **GitHub Pages**
 
-[Ссылка :)]()
-
+[Ссылка :)](https://sergeishabanov1989.github.io/mesto/)
