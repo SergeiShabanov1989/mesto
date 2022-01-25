@@ -3,12 +3,13 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  border-bottom: 1px solid #000000 .2;
   padding: 0;
   font-size: 14px;
   line-height: 17px;
 }
 
-.popup__text:nth-child(4n) {
+.popup__text:nth-child(3n) {
   margin-top: 0;
   margin-bottom: 0;
 }

@@ -24,16 +24,17 @@
         <div class="profile__input">
           <div class="profile__cover-text">
             <h1 class="profile__input-name">Жак-Ив Кусто</h1>
-            <input
-              type="image"
-              alt="кнопка изменить форму"
-              src="./images/EditButton.svg"
-            class="profile__button">
+            <button
+              type="button"
+              class="profile__button">
+            </button>
           </div>
           <p class="profile__input-occupation">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add-button">
+      <button
+        class="profile__add-button"
+      type="button">
         <img
           class="profile__add-button-img"
           src="./images/Vector.svg"
@@ -48,10 +49,10 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Карачаевск</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
       <div class="elements__element">
@@ -61,10 +62,10 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Гора Эльбрус</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
       <div class="elements__element">
@@ -74,10 +75,10 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Домбай</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
       <div class="elements__element">
@@ -87,10 +88,10 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Гора Эльбрус</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
       <div class="elements__element">
@@ -100,10 +101,10 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Домбай</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
       <div class="elements__element">
@@ -113,32 +114,32 @@
           class="elements__image">
         <div class="elements__discription">
           <h2 class="elements__text">Карачаево-Черкессия</h2>
-          <img
+          <button
             class="elements__heart"
-            src="./images/heart.svg"
-          alt="поставить лайк">
+          type="button">
+          </button>
         </div>
       </div>
     </section>
   </main>
   <footer class="footer page__footer">
-    <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
+    <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
   <div class="popup">
-    <form class="popup__container">
-      <button class="popup__close-btn">
-        <img
-          class="popup__close-btn-img"
-          src="./images/CloseIcon.svg"
-        alt="кнопка закрыть форму">
-      </button>  
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" value="Жак-Ив Кусто" class="popup__text popup__text_name">
-      <input type="text" value="Исследователь океана" class="popup__text popup__text_occupation">
-      <button class="popup__button" type="submit">
-      Сохранить
+    <div class="popup__container">
+      <button
+        class="popup__close-btn"
+      type="button">
       </button>
-    </form>
+      <form class="popup__form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" value="Жак-Ив Кусто" class="popup__text popup__text_type_name">
+        <input type="text" value="Исследователь океана" class="popup__text popup__text_type_occupation">
+        <button class="popup__button" type="submit">
+        Сохранить
+        </button>
+      </form>
+    </div>
   </div>
   <script src="./script/script.js"></script>
 </body>

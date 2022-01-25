@@ -1,6 +1,7 @@
 .profile__add-button {
-  height: 50px;
-  width: 150px;
+  box-sizing: content-box;
+  min-height: 50px;
+  min-width: 150px;
   border: 2px solid white;
   border-radius: 2px;
   display: flex;
