@@ -23,6 +23,7 @@
 @import url(../blocks/elements/__discription/elements__discription.css);
 @import url(../blocks/elements/__text/elements__text.css);
 @import url(../blocks/elements/__heart/elements__heart.css);
+@import url(../blocks/elements/__heart/_active/elements__heart_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
