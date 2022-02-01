@@ -47,6 +47,7 @@ const formElementImage = container.querySelector('.popup__form_type_image');
 const popupOnlyImage = container.querySelector('.popup-image');
 const popupOnlyImageImg = container.querySelector('.popup-image__img');
 const popupOnlyImageTitle = container.querySelector('.popup-image__title');
+const cLoseButtonOnlyImage = container.querySelector('.popup-image__close-btn');
 
 function render() {
   initialCards.forEach(renderElement);
@@ -113,6 +114,10 @@ function renderPopupImage (evt) {
   }
 }
 
+function popupCloseOnlyImage() {
+  popupOnlyImage.classList.remove('popup-image_opened');
+}
+
 function renderHeartActive (evt) {
   if (!evt.target.classList.contains('elements__heart_active')) {
     evt.target.classList.add('elements__heart_active');
@@ -133,3 +138,4 @@ formElementEdit.addEventListener('submit', formSubmitHandler);
 addButton.addEventListener('click', popupImageOpen);
 closeButtonImage.addEventListener('click', popupImageClose);
 formElementImage.addEventListener('submit', formSubmitHandler2);
+cLoseButtonOnlyImage.addEventListener('click', popupCloseOnlyImage);
