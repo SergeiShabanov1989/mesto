@@ -86,7 +86,7 @@ function closePopupButton() {
   }));
 }
 
-function formSubmitHandler (evt) {
+function submitFormHandler (evt) {
   evt.preventDefault();
   nameNew.textContent = nameInput.value;
   jobNew.textContent = jobInput.value;
@@ -141,6 +141,6 @@ render()
 closePopupButton()
 
 editButton.addEventListener('click', openPopupEdit);
-formElementEdit.addEventListener('submit', formSubmitHandler);
+formElementEdit.addEventListener('submit', submitFormHandler);
 addButton.addEventListener('click', openPopupImage);
 formElementImage.addEventListener('submit', addItem);
