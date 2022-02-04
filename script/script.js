@@ -76,21 +76,25 @@ function openPopup(el) {
 }
 
 //функция закрытия всех попапов
-function closePopup() {
-  popupAll.forEach(obj => obj.classList.remove('popup_opened'))
+function closePopup(popup) {
+  popup.classList.remove('popup_opened')
 }
 
 function closePopupButton() {
-  popupCLoseButton.forEach(btn => btn.addEventListener('click', function () {
-      closePopup(btn.closest('.popup'))
-  }));
+  popupAll.forEach((popup) => {
+      popup.addEventListener('click', (evt) => {          
+          if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button')) {
+          closePopup(popup)
+          }
+      })
+  })
 }
 
 function submitFormHandler (evt) {
   evt.preventDefault();
   nameNew.textContent = nameInput.value;
   jobNew.textContent = jobInput.value;
-  closePopup()
+  closePopupButton()
 }
 
 function openPopupImage() {
@@ -100,7 +104,7 @@ function openPopupImage() {
 function resetForm() {
   elementPlace.value = '';
   elementUrl.value = '';
-  closePopup()
+  closePopupButton()
 }
 
 
@@ -120,6 +124,7 @@ function addListeners(el) {
 function renderPopupImage (evt) {
   if (evt.target.closest('.elements__element')) {
     popupOnlyImageImg.src = evt.target.closest('.elements__image').src;
+    popupOnlyImageImg.alt = evt.target.closest('.elements__image').alt;
     popupOnlyImageTitle.innerText = evt.target.closest('.elements__element').querySelector('.elements__text').textContent;
     openPopup(popupOnlyImage)
   }
