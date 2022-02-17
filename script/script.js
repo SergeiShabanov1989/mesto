@@ -73,20 +73,30 @@ function openPopupEdit() {
 //функция открытия всех попапов
 function openPopup(el) {
   el.classList.add('popup_opened');
+  clickHandler(el)
 }
 
 //функция закрытия всех попапов
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
+  document.removeEventListener('keydown', clickHandler)
 }
 
 function closePopupButton() {
   popupAll.forEach((popup) => {
-      popup.addEventListener('click', (evt) => {          
-          if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button')) {
+      popup.addEventListener('click', (evt) => {
+          if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button') || evt.target === evt.currentTarget) {
           closePopup(popup)
           }
       })
+  })
+}
+
+function clickHandler (el) {
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(el)
+    }
   })
 }
 

@@ -1,5 +1,5 @@
 .popup__text {
-  margin: 54px 36px 30px;
+  width: 100%;
   border-top: 0;
   border-left: 0;
   border-right: 0;
@@ -7,9 +7,4 @@
   padding: 0;
   font-size: 14px;
   line-height: 17px;
-}
-
-.popup__text:nth-child(3n) {
-  margin-top: 0;
-  margin-bottom: 0;
 }
