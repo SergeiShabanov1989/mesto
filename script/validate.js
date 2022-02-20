@@ -22,52 +22,60 @@ const checkInputValidity = (formElement, inputElement) => {
     }
 };
 
-const setCustomError = (formElement, inputElement) => {
+const setCustomError = (formElement, inputElement, {customErrorClass}) => {
     const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
     if (inputElement.value === '') {
-        inputElement.classList.add('popup__text_type_error');
+        inputElement.classList.add(customErrorClass);
         errorElement.textContent = ERRORS.fieldMismatch;
     }
-}
+};
 
-const setEventListeners = (formElement) => {
-    const inputs = Array.from(formElement.querySelectorAll('.popup__text'));
-    const button = formElement.querySelector('.popup__button');
+const setEventListeners = (formElement, { InputSelector, buttonSelector, ...rest}) => {
+    const inputs = Array.from(formElement.querySelectorAll(InputSelector));
+    const button = formElement.querySelector(buttonSelector);
 
-    checkButtonValidity(formElement, button);
+    formElement.addEventListener('reset', () => {
+        disableButton(button, rest);
+    });
+
+    checkButtonValidity(formElement, button, rest);
     inputs.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
             checkInputValidity(formElement, inputElement);
-            setCustomError(formElement, inputElement);
-            checkButtonValidity(formElement, button);
+            setCustomError(formElement, inputElement, rest);
+            checkButtonValidity(formElement, button, rest);
         });
     });
 };
 
-const disableButton = (formElement, button) => {
+const disableButton = (button, disableErrorClass) => {
     button.setAttribute('disabled', '');
-    button.classList.add('popup__button_disabled');
+    button.classList.add(disableErrorClass);
 }
-const checkButtonValidity = (formElement, button) => {
+const checkButtonValidity = (formElement, button, { disableErrorClass }) => {
     if (formElement.checkValidity()) {
         button.removeAttribute('disabled');
-        button.classList.remove('popup__button_disabled');
+        button.classList.remove(disableErrorClass);
     } else {
-        disableButton(formElement, button);
+        disableButton(button, disableErrorClass);
     }
-}
+};
 
-const enableValidation = ( {formSelector} ) => {
+const enableValidation = ( {formSelector, ...rest} ) => {
     const form = Array.from(document.querySelectorAll(formSelector));
 
     form.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) =>{
             evt.preventDefault();
         });
-        setEventListeners(formElement);
+        setEventListeners(formElement, rest);
     });
 };
 
 enableValidation({
-    formSelector: '.popup__form'
+    formSelector: '.popup__form',
+    InputSelector: '.popup__text',
+    buttonSelector: '.popup__button',
+    customErrorClass: 'popup__text_type_error',
+    disableErrorClass: 'popup__button_disabled'
 });
