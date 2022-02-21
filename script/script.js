@@ -33,7 +33,6 @@ const popupImage = container.querySelector('.popup_type_image')
 const formElementEdit = popup.querySelector('.popup__form_type_edit');
 const nameInput = popup.querySelector('.popup__text_type_name');
 const jobInput = popup.querySelector('.popup__text_type_occupation');
-const renderTitle = popup.querySelector('.popup__title');
 const nameNew = container.querySelector('.profile__input-name');
 const jobNew = container.querySelector('.profile__input-occupation');
 const addButton = container.querySelector('.profile__add-button');
@@ -46,7 +45,6 @@ const popupOnlyImage = container.querySelector('.popup-image');
 const popupOnlyImageImg = container.querySelector('.popup-image__img');
 const popupOnlyImageTitle = container.querySelector('.popup-image__title');
 const popupAll = container.querySelectorAll('.popup');
-const popupCLoseButton = container.querySelectorAll('.popup__close-btn');
 
 function render() {
   initialCards.forEach(function (card) {

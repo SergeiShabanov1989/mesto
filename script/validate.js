@@ -34,13 +34,12 @@ const setEventListeners = (formElement, { InputSelector, buttonSelector, ...rest
     const inputs = Array.from(formElement.querySelectorAll(InputSelector));
     const button = formElement.querySelector(buttonSelector);
 
-    formElement.addEventListener('reset', () => {
-        disableButton(button, rest);
-    });
+    formElement.addEventListener('submit', () => disableButton(button, rest));
 
     checkButtonValidity(formElement, button, rest);
+
     inputs.forEach((inputElement) => {
-        inputElement.addEventListener('input', function () {
+        inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement);
             setCustomError(formElement, inputElement, rest);
             checkButtonValidity(formElement, button, rest);
@@ -48,16 +47,16 @@ const setEventListeners = (formElement, { InputSelector, buttonSelector, ...rest
     });
 };
 
-const disableButton = (button, disableErrorClass) => {
+const disableButton = (button, { disableErrorClass }) => {
     button.setAttribute('disabled', '');
     button.classList.add(disableErrorClass);
 }
 const checkButtonValidity = (formElement, button, { disableErrorClass }) => {
     if (formElement.checkValidity()) {
         button.removeAttribute('disabled');
-        button.classList.remove(disableErrorClass);
+        button.classList.remove( disableErrorClass);
     } else {
-        disableButton(button, disableErrorClass);
+        disableButton(button, { disableErrorClass });
     }
 };
 
@@ -65,9 +64,7 @@ const enableValidation = ( {formSelector, ...rest} ) => {
     const form = Array.from(document.querySelectorAll(formSelector));
 
     form.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) =>{
-            evt.preventDefault();
-        });
+        formElement.addEventListener('submit', evt => evt.preventDefault());
         setEventListeners(formElement, rest);
     });
 };
