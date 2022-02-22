@@ -1,32 +1,20 @@
-const ERRORS = {
-  fieldMismatch: 'Вы пропустили это поле.'
-};
-
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
-  inputElement.classList.add('popup__text_type_error');
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, { inputErrorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
-  inputElement.classList.remove('popup__text_type_error');
+  inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, rest) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, rest);
   } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setCustomError = (formElement, inputElement, {customErrorClass}) => {
-  const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
-  if (inputElement.value === '') {
-    inputElement.classList.add(customErrorClass);
-    errorElement.textContent = ERRORS.fieldMismatch;
+    hideInputError(formElement, inputElement, rest);
   }
 };
 
@@ -40,8 +28,7 @@ const setEventListeners = (formElement, { InputSelector, buttonSelector, ...rest
 
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      setCustomError(formElement, inputElement, rest);
+      checkInputValidity(formElement, inputElement, rest);
       checkButtonValidity(formElement, button, rest);
     });
   });
@@ -73,6 +60,6 @@ enableValidation({
   formSelector: '.popup__form',
   InputSelector: '.popup__text',
   buttonSelector: '.popup__button',
-  customErrorClass: 'popup__text_type_error',
+  inputErrorClass: 'popup__text_type_error',
   disableErrorClass: 'popup__button_disabled'
 });

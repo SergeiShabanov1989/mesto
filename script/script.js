@@ -27,12 +27,11 @@ const initialCards = [
 
 const container = document.querySelector('.page');
 const editButton = container.querySelector('.profile__button');
-const popup = container.querySelector('.popup');
 const popupEdit = container.querySelector('.popup_type_edit')
 const popupImage = container.querySelector('.popup_type_image')
-const formElementEdit = popup.querySelector('.popup__form_type_edit');
-const nameInput = popup.querySelector('.popup__text_type_name');
-const jobInput = popup.querySelector('.popup__text_type_occupation');
+const formElementEdit = container.querySelector('.popup__form_type_edit');
+const nameInput = container.querySelector('.popup__text_type_name');
+const jobInput = container.querySelector('.popup__text_type_occupation');
 const nameNew = container.querySelector('.profile__input-name');
 const jobNew = container.querySelector('.profile__input-occupation');
 const addButton = container.querySelector('.profile__add-button');
@@ -66,18 +65,18 @@ function openPopupEdit() {
   openPopup(popupEdit)
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
+  listenerEscape(popupEdit)
 }
 
 //функция открытия всех попапов
 function openPopup(el) {
   el.classList.add('popup_opened');
-  clickHandler(el)
 }
 
 //функция закрытия всех попапов
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
-  document.removeEventListener('keydown', clickHandler)
+  document.removeEventListener('keydown', listenerEscape)
 }
 
 function closePopupButton() {
@@ -90,10 +89,10 @@ function closePopupButton() {
   })
 }
 
-function clickHandler (el) {
+function listenerEscape (popup) {
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      closePopup(el)
+      closePopup(popup)
     }
   })
 }
@@ -107,20 +106,15 @@ function submitFormHandler (evt) {
 
 function openPopupImage() {
   openPopup(popupImage)
+  listenerEscape(popupImage)
 }
-
-function resetForm() {
-  elementPlace.value = '';
-  elementUrl.value = '';
-  closePopupButton()
-}
-
 
 function addItem(evt) {
   evt.preventDefault();
-  const obj = { name: elementPlace.value, link: elementUrl.value};
-  elements.prepend(createCard(obj));
-  resetForm();
+  const cardData = { name: elementPlace.value, link: elementUrl.value};
+  elements.prepend(createCard(cardData));
+  formElementImage.reset();
+  closePopupButton()
 }
 
 function addListeners(el) {
@@ -130,20 +124,15 @@ function addListeners(el) {
 }
 
 function renderPopupImage (evt) {
-  if (evt.target.closest('.elements__element')) {
-    popupOnlyImageImg.src = evt.target.closest('.elements__image').src;
-    popupOnlyImageImg.alt = evt.target.closest('.elements__image').alt;
-    popupOnlyImageTitle.innerText = evt.target.closest('.elements__element').querySelector('.elements__text').textContent;
-    openPopup(popupOnlyImage)
-  }
+  popupOnlyImageImg.src = evt.target.closest('.elements__image').src;
+  popupOnlyImageImg.alt = evt.target.closest('.elements__image').alt;
+  popupOnlyImageTitle.textContent = evt.target.closest('.elements__element').querySelector('.elements__text').textContent;
+  openPopup(popupOnlyImage)
+  listenerEscape(popupOnlyImage)
 }
 
 function renderHeartActive (evt) {
-  if (!evt.target.classList.contains('elements__heart_active')) {
-    evt.target.classList.add('elements__heart_active');
-  } else {
-    evt.target.classList.remove('elements__heart_active');
-  }
+  evt.target.classList.toggle('elements__heart_active');
 }
 
 function deleteElement(event) {
