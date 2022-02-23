@@ -4,7 +4,7 @@ const configObject = {
   buttonSelector: '.popup__button',
   inputErrorClass: 'popup__text_type_error',
   disableErrorClass: 'popup__button_disabled'
-}
+};
 
 const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass }) => {
   const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
@@ -45,7 +45,8 @@ const setEventListeners = (formElement, { InputSelector, buttonSelector, ...rest
 const disableButton = (button, { disableErrorClass }) => {
   button.setAttribute('disabled', '');
   button.classList.add(disableErrorClass);
-}
+};
+
 const checkButtonValidity = (formElement, button, { disableErrorClass }) => {
   if (formElement.checkValidity()) {
     button.removeAttribute('disabled');

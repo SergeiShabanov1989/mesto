@@ -145,7 +145,6 @@ function deleteElement(event) {
 render()
 closePopupButton()
 
-// editButton.addEventListener('click', openPopupEdit);
 editButton.addEventListener('click', openPopupEdit);
 formElementEdit.addEventListener('submit', submitFormHandler);
 addButton.addEventListener('click', openPopupImage);
