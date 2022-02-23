@@ -65,7 +65,8 @@ function openPopupEdit() {
   openPopup(popupEdit)
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
-  listenerEscape(popupEdit)
+  enableValidation(configObject);
+  listenerEscape(popupEdit);
 }
 
 //функция открытия всех попапов
@@ -83,7 +84,9 @@ function closePopupButton() {
   popupAll.forEach((popup) => {
       popup.addEventListener('click', (evt) => {
           if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button') || evt.target === evt.currentTarget) {
-          closePopup(popup)
+          closePopup(popup);
+          hideInputError(formElementEdit, nameInput, configObject);
+          hideInputError(formElementEdit, jobInput, configObject);
           }
       })
   })
@@ -142,6 +145,7 @@ function deleteElement(event) {
 render()
 closePopupButton()
 
+// editButton.addEventListener('click', openPopupEdit);
 editButton.addEventListener('click', openPopupEdit);
 formElementEdit.addEventListener('submit', submitFormHandler);
 addButton.addEventListener('click', openPopupImage);
