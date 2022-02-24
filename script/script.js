@@ -74,6 +74,8 @@ function openPopup(el) {
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       closePopup(el)
+      hideInputError(formElementEdit, nameInput, configObject);
+      hideInputError(formElementEdit, jobInput, configObject);
     }
   })
 }
