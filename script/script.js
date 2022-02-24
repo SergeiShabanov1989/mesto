@@ -66,18 +66,22 @@ function openPopupEdit() {
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
   enableValidation(configObject);
-  listenerEscape(popupEdit);
 }
 
 //функция открытия всех попапов
 function openPopup(el) {
   el.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(el)
+    }
+  })
 }
 
 //функция закрытия всех попапов
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
-  document.removeEventListener('keydown', listenerEscape)
+  document.removeEventListener('keydown', openPopup);
 }
 
 function closePopupButton() {
@@ -92,14 +96,6 @@ function closePopupButton() {
   })
 }
 
-function listenerEscape (popup) {
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup)
-    }
-  })
-}
-
 function submitFormHandler (evt) {
   evt.preventDefault();
   nameNew.textContent = nameInput.value;
@@ -109,7 +105,6 @@ function submitFormHandler (evt) {
 
 function openPopupImage() {
   openPopup(popupImage)
-  listenerEscape(popupImage)
 }
 
 function addItem(evt) {
@@ -131,7 +126,6 @@ function renderPopupImage (evt) {
   popupOnlyImageImg.alt = evt.target.closest('.elements__image').alt;
   popupOnlyImageTitle.textContent = evt.target.closest('.elements__element').querySelector('.elements__text').textContent;
   openPopup(popupOnlyImage)
-  listenerEscape(popupOnlyImage)
 }
 
 function renderHeartActive (evt) {
