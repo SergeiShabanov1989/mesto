@@ -71,19 +71,22 @@ function openPopupEdit() {
 //функция открытия всех попапов
 function openPopup(el) {
   el.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', closePopupOnEsc);
+}
+
+function closePopupOnEsc(evt) {
     if (evt.key === 'Escape') {
-      closePopup(el)
+      const popupOpened = document.querySelector('.popup_opened')
+      closePopup(popupOpened)
       hideInputError(formElementEdit, nameInput, configObject);
       hideInputError(formElementEdit, jobInput, configObject);
-    }
-  })
+  }
 }
 
 //функция закрытия всех попапов
 function closePopup(popup) {
   popup.classList.remove('popup_opened')
-  document.removeEventListener('keydown', openPopup);
+  document.removeEventListener('keydown', closePopupOnEsc);
 }
 
 function closePopupButton() {
