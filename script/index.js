@@ -72,7 +72,7 @@ function openPopupEdit() {
   openPopup(popupEdit)
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
-  enableValidation(configObject);
+  editProfileValidator.enableValidation();
 }
 
 //функция открытия всех попапов
@@ -85,8 +85,8 @@ function closePopupOnEsc(evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened')
     closePopup(popupOpened)
-    hideInputError(formElementEdit, nameInput, configObject);
-    hideInputError(formElementEdit, jobInput, configObject);
+    editProfileValidator.hideInputError(nameInput);
+    editProfileValidator.hideInputError(jobInput);
   }
 }
 
@@ -101,8 +101,8 @@ function closePopupButton() {
     popup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button') || evt.target === evt.currentTarget) {
         closePopup(popup);
-        hideInputError(formElementEdit, nameInput, configObject);
-        hideInputError(formElementEdit, jobInput, configObject);
+        editProfileValidator.hideInputError(nameInput);
+        editProfileValidator.hideInputError(jobInput);
       }
     })
   })

@@ -10,7 +10,7 @@ export class FormValidator {
     errorElement.textContent = errorMessage;
   }
 
-  _hideInputError(inputElement) {
+  hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.name}-error`);
     inputElement.classList.remove(this._settings.inputErrorClass);
     errorElement.textContent = '';
@@ -20,7 +20,7 @@ export class FormValidator {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(inputElement);
+      this.hideInputError(inputElement);
     }
   }
 
