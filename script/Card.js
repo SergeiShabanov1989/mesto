@@ -1,10 +1,9 @@
-import { popupOnlyImage, popupOnlyImageImg, popupOnlyImageTitle, openPopup } from './index.js'
-
 export class Card {
-  constructor(card, cardSelector) {
+  constructor(card, cardSelector, handlePopupImage) {
     this._name = card.name;
     this._link = card.link;
     this._cardSelector = cardSelector;
+    this._handlePopupImage = handlePopupImage;
   }
 
   _getTemplate() {
@@ -28,16 +27,9 @@ export class Card {
     return this._element;
   }
 
-  _openPopupImage() {
-    popupOnlyImageImg.src = this._link;
-    popupOnlyImageImg.alt = this._name;
-    popupOnlyImageTitle.textContent = this._name;
-    openPopup(popupOnlyImage)
-  }
-
   _setEventListeners() {
     this._element.querySelector('.elements__image').addEventListener('click', () => {
-      this._openPopupImage();
+      this._handlePopupImage(this._name, this._link);
     });
 
     this._element.querySelector('.elements__trash').addEventListener('click', () => {
@@ -49,11 +41,11 @@ export class Card {
     });
   }
 
-  _deleteElement() {
+  _deleteElement = () => {
     this._element.remove();
   }
 
-  _likeButton() {
+  _likeButton = () => {
     this._element.querySelector('.elements__heart').classList.toggle('elements__heart_active');
   }
 }

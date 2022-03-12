@@ -1,5 +1,17 @@
 import { Card } from './Card.js';
-import  { FormValidator } from './FormValidator.js'
+import {
+  nameInput,
+  jobInput,
+  formElementEdit,
+  formElementImage,
+  editProfileValidator,
+  addImageValidator,
+  openPopup,
+  closePopup,
+  popupOnlyImageImg,
+  popupOnlyImageTitle,
+  popupOnlyImage
+} from './utils.js';
 
 const initialCards = [
   {
@@ -32,68 +44,37 @@ const container = document.querySelector('.page');
 const editButton = container.querySelector('.profile__button');
 const popupEdit = container.querySelector('.popup_type_edit')
 const popupImage = container.querySelector('.popup_type_image')
-const formElementEdit = container.querySelector('.popup__form_type_edit');
-const nameInput = container.querySelector('.popup__text_type_name');
-const jobInput = container.querySelector('.popup__text_type_occupation');
 const nameNew = container.querySelector('.profile__input-name');
 const jobNew = container.querySelector('.profile__input-occupation');
 const addButton = container.querySelector('.profile__add-button');
 const elements = container.querySelector('.elements');
+const popupAll = container.querySelectorAll('.popup');
 const elementPlace = container.querySelector('.popup__text_type_place');
 const elementUrl = container.querySelector('.popup__text_type_url');
-const formElementImage = container.querySelector('.popup__form_type_image');
-export const popupOnlyImage = container.querySelector('.popup-image');
-export const popupOnlyImageImg = container.querySelector('.popup-image__img');
-export const popupOnlyImageTitle = container.querySelector('.popup-image__title');
-const popupAll = container.querySelectorAll('.popup');
-
-const configObject = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text',
-  buttonSelector: '.popup__button',
-  inputErrorClass: 'popup__text_type_error',
-  disableErrorClass: 'popup__button_disabled'
-};
-
-const editProfileValidator = new FormValidator(configObject, formElementEdit);
-const addImageValidator = new FormValidator(configObject, formElementImage);
 
 editProfileValidator.enableValidation();
 addImageValidator.enableValidation();
 
+const handlePopupImage = (name, link) => {
+  popupOnlyImageImg.src = link;
+  popupOnlyImageImg.alt = name;
+  popupOnlyImageTitle.textContent = name;
+  openPopup(popupOnlyImage)
+}
+
 initialCards.forEach((item) => {
-  const card = new Card(item, '.elements__template');
+  const card = new Card(item, '.elements__template', handlePopupImage);
   const cardElement = card.generateCard();
 
   elements.prepend(cardElement);
 });
+
 
 function openPopupEdit() {
   openPopup(popupEdit)
   nameInput.value = nameNew.textContent;
   jobInput.value = jobNew.textContent;
   editProfileValidator.enableValidation();
-}
-
-//функция открытия всех попапов
-export function openPopup(el) {
-  el.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupOnEsc);
-}
-
-function closePopupOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened')
-    closePopup(popupOpened)
-    editProfileValidator.hideInputError(nameInput);
-    editProfileValidator.hideInputError(jobInput);
-  }
-}
-
-//функция закрытия всех попапов
-function closePopup(popup) {
-  popup.classList.remove('popup_opened')
-  document.removeEventListener('keydown', closePopupOnEsc);
 }
 
 function closePopupButton() {
