@@ -21,6 +21,8 @@ export const addImageValidator = new FormValidator(configObject, formElementImag
 
 //функция открытия всех попапов
 export function openPopup(el) {
+  editProfileValidator.resetValidation()
+  addImageValidator.resetValidation()
   el.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
 }
@@ -29,8 +31,6 @@ export function closePopupOnEsc(evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened')
     closePopup(popupOpened)
-    editProfileValidator.hideInputError(nameInput);
-    editProfileValidator.hideInputError(jobInput);
   }
 }
 
