@@ -22,7 +22,7 @@ export class Card {
     this._cardElement = this._element.querySelector('.elements__image');
 
     this._element.querySelector('.elements__text').textContent = this._name;
-    this._element.querySelector('.elements__image').alt = this._name;
+    this._cardElement.alt = this._name;
     this._cardElement.src= this._link;
 
     this._setEventListeners();

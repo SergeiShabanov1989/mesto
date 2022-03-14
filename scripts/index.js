@@ -4,13 +4,19 @@ import {
   jobInput,
   formElementEdit,
   formElementImage,
-  editProfileValidator,
-  addImageValidator,
   openPopup,
   closePopup,
   popupOnlyImageImg,
   popupOnlyImageTitle,
-  popupOnlyImage
+  popupOnlyImage,
+  openPopupEdit,
+  nameNew,
+  jobNew,
+  openPopupImage,
+  popupEdit,
+  popupImage,
+  profileEditValidator,
+  imageAddValidator
 } from './utils.js';
 
 const initialCards = [
@@ -42,18 +48,14 @@ const initialCards = [
 
 const container = document.querySelector('.page');
 const buttonEdit = container.querySelector('.profile__button');
-const popupEdit = container.querySelector('.popup_type_edit')
-const popupImage = container.querySelector('.popup_type_image')
-const nameNew = container.querySelector('.profile__input-name');
-const jobNew = container.querySelector('.profile__input-occupation');
 const buttonAdd = container.querySelector('.profile__add-button');
 const elements = container.querySelector('.elements');
 const popupAll = container.querySelectorAll('.popup');
 const placeElement = container.querySelector('.popup__text_type_place');
 const urlElement = container.querySelector('.popup__text_type_url');
 
-editProfileValidator.enableValidation();
-addImageValidator.enableValidation();
+profileEditValidator.enableValidation();
+imageAddValidator.enableValidation();
 
 const handlePopupImage = (name, link) => {
   popupOnlyImageImg.src = link;
@@ -73,44 +75,28 @@ initialCards.forEach((item) => {
   renderCard(item)
 });
 
-function openPopupEdit() {
-  openPopup(popupEdit)
-  nameInput.value = nameNew.textContent;
-  jobInput.value = jobNew.textContent;
-  editProfileValidator.checkButtonValidity();
-}
-
-function closePopupButton() {
-  popupAll.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup__close-btn') || evt.target.closest('.popup__button') || evt.target === evt.currentTarget) {
-        closePopup(popup);
-      }
-    })
+popupAll.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup__close-btn') || evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
   })
-}
+})
 
 function submitFormHandler (evt) {
   evt.preventDefault();
   nameNew.textContent = nameInput.value;
   jobNew.textContent = jobInput.value;
-  closePopupButton()
-}
-
-function openPopupImage() {
-  openPopup(popupImage)
+  closePopup(popupEdit)
 }
 
 function addItem(evt) {
   evt.preventDefault();
   const cardData = { name: placeElement.value, link: urlElement.value};
   renderCard(cardData)
-
+  closePopup(popupImage)
   formElementImage.reset();
-  closePopupButton()
 }
-
-closePopupButton()
 
 buttonEdit.addEventListener('click', openPopupEdit);
 formElementEdit.addEventListener('submit', submitFormHandler);
