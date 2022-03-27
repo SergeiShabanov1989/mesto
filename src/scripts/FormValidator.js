@@ -2,6 +2,7 @@ export class FormValidator {
   constructor(settings, form) {
     this._form = form;
     this._settings = settings;
+    this._inputs = Array.from(this._form.querySelectorAll(settings.inputSelector));
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -48,8 +49,7 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    const { inputSelector, buttonSelector } = this._settings;
-    this._inputs = Array.from(this._form.querySelectorAll(inputSelector));
+    const { buttonSelector } = this._settings;
     this._button = this._form.querySelector(buttonSelector);
 
     this.checkButtonValidity();

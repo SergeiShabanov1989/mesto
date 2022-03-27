@@ -1,5 +1,3 @@
-import {editPopup} from "./utils.js";
-
 export default class UserInfo {
   constructor({ person, occupation }) {
     this._person = document.querySelector(person);
@@ -11,11 +9,8 @@ export default class UserInfo {
     return userData
   }
 
-  setUserInfo = () => {
-    this._person.textContent = editPopup.inputList[0].value;
-    this._occupation.textContent = editPopup.inputList[1].value;
+  setUserInfo = (data) => {
+    this._person.textContent = data.popup__name;
+    this._occupation.textContent = data.popup__occupation;
   }
 }
-
-// this._person = editPopup.inputList[0].value;
-// this._occupation = editPopup.inputList[1].value;
