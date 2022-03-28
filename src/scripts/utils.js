@@ -5,6 +5,8 @@ export const formElementImage = document.querySelector('.popup__form_type_image'
 export const buttonEdit = document.querySelector('.profile__button');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const elements = document.querySelector('.elements');
+export const userName = document.querySelector('.popup__text_type_name');
+export const userJob = document.querySelector('.popup__text_type_occupation');
 
 export const configObject = {
   formSelector: '.popup__form',

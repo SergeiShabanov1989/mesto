@@ -6,7 +6,9 @@ import {
   buttonAdd,
   elements,
   formElementImage,
-  formElementEdit
+  formElementEdit,
+  userName,
+  userJob
 } from './utils.js';
 import '../pages/index.css';
 import Section from "./Section.js";
@@ -62,8 +64,6 @@ function openPopupEdit() {
   editPopup.open();
   profileEditValidator.resetValidation();
   const userData = userInfo.getUserInfo();
-  const userName = document.querySelector('.popup__text_type_name');
-  const userJob = document.querySelector('.popup__text_type_occupation');
   userName.value = userData.name;
   userJob.value = userData.job;
   profileEditValidator.checkButtonValidity();
