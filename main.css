@@ -48,8 +48,8 @@
 .popup__button{background-color:#000;border:0;border-radius:5px;color:#fff;cursor:pointer;font-size:18px;height:50px;line-height:22px;margin:15px 36px 37px;padding:0;transition:opacity .3s}.popup__button:hover{opacity:.8}@media screen and (max-width:1023px){.popup__button{font-size:14px;line-height:17px;margin:15px 28px 26px}}@media screen and (max-width:767px){.popup__button{font-size:14px;line-height:17px;margin:15px 22px 25px}}
 .popup__button_disabled{background:rgba(0,0,0,.8);cursor:default}.popup__button_disabled:hover{opacity:1}
 .popup-image{background-color:rgba(0,0,0,.9)}
-.popup-image__container{display:flex;flex-direction:column;max-height:75%;max-width:75%;position:relative}@media screen and (min-width:767px){.popup-image__container{height:75%}}
+.popup-image__container{display:flex;flex-direction:column;max-height:75%;max-width:75%;position:relative}@media screen and (min-width:768px){.popup-image__container{height:75%}}
 .popup-image__close-btn{background:url(58aaf1081fb73be79fc3.svg) 50% no-repeat;background-size:100%;border:none;cursor:pointer;height:32px;padding:0;position:absolute;right:-40px;top:-40px;transition:opacity .3s;width:32px}.popup-image__close-btn:hover{opacity:.6}@media screen and (max-width:1023px){.popup-image__close-btn{height:25px;right:-30px;top:-30px;width:25px}}@media screen and (max-width:767px){.popup-image__close-btn{height:20px;right:0;top:-30px;width:20px}}
-.popup-image__img{height:100%;max-width:100%;-o-object-fit:fill;object-fit:fill;-o-object-position:center;object-position:center}
+.popup-image__img{max-height:100%;-o-object-fit:fill;object-fit:fill;-o-object-position:center;object-position:center;width:100%}
 .popup-image__title{color:#fff;font-size:12px;font-weight:400;line-height:15px}
 
