@@ -25,6 +25,10 @@ export default class PopupWithForm extends Popup {
     })
   };
 
+  setButtonText(text) {
+    this._form.querySelector('.popup__button').textContent = text;
+  }
+
   close() {
     super.close();
   }

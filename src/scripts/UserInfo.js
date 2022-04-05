@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ person, occupation }) {
+  constructor({ person, occupation, avatar }) {
     this._person = document.querySelector(person);
     this._occupation = document.querySelector(occupation);
+    this._avatar = document.querySelector(avatar);
   }
 
   getUserInfo = () => {
@@ -9,8 +10,9 @@ export default class UserInfo {
     return userData
   }
 
-  setUserInfo = (data) => {
-    this._person.textContent = data.popup__name;
-    this._occupation.textContent = data.popup__occupation;
+  setUserInfo = (title, job, avatar) => {
+    this._person.textContent = title;
+    this._occupation.textContent = job;
+    this._avatar.src = avatar;
   }
 }
