@@ -1,4 +1,4 @@
-import { Card } from './Card.js';
+import { Card } from '../components/Card.js';
 import {
   configObject,
   buttonEdit,
@@ -10,15 +10,15 @@ import {
   userJob,
   formElementAvatar,
   buttonEditAvatar
-} from './utils.js';
-import '../pages/index.css';
-import Section from "./Section.js";
-import PopupWithImage from './PopupWithImage.js';
-import {FormValidator} from "./FormValidator.js";
-import UserInfo from "./UserInfo.js";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithConfirmation from "./ PopupWithConfirmation.js";
-import Api from "./Api.js";
+} from '../components/utils.js';
+import './index.css';
+import Section from "../components/Section.js";
+import PopupWithImage from '../components/PopupWithImage.js';
+import {FormValidator} from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/ PopupWithConfirmation.js";
+import Api from "../components/Api.js";
 
 export let userId
 
@@ -36,9 +36,11 @@ Promise.all([api.getProfile(), api.getInitialCards()])
     userId = userData._id;
 
     cards.forEach(data => {
-      createCard(data)
+      const cards = [data]
+      cardsContainer.renderItems(cards)
     })
 })
+  .catch(console.log)
 
 const popupOpenWithOnlyImage = new PopupWithImage('.popup-image')
 
@@ -51,30 +53,33 @@ function createCard(item) {
     '.elements__template',
     handlePopupImage,
     (id) => {
-        deletePopup.open();
-        deletePopup.getIdElement(() => {
-          api.deleteCard(id)
-            .finally(() => {
-              card.deleteElement()
-              deletePopup.close()
-            })
-        });
-      },
+      deletePopup.open();
+      deletePopup.getIdElement(() => {
+        api.deleteCard(id)
+          .then(() => {
+            card.deleteElement()
+            deletePopup.close()
+          })
+          .catch(console.log)
+      });
+    },
     (id) => {
-    if (card.isLike()) {
-      api.deleteLike(id)
-        .then(res => {
-          card.likeCounter(res.likes)
-        })
-    } else {
-      api.addLike(id)
-        .then(res => {
-          card.likeCounter(res.likes)
-        })
-    }
-  });
+      if (card.isLike()) {
+        api.deleteLike(id)
+          .then(res => {
+            card.likeCounter(res.likes)
+          })
+          .catch(console.log)
+      } else {
+        api.addLike(id)
+          .then(res => {
+            card.likeCounter(res.likes)
+          })
+          .catch(console.log)
+      }
+    });
   const cardElement = card.generateCard();
-  cardsContainer.addItem(cardElement);
+  return cardElement
 }
 
 const profileEditValidator = new FormValidator(configObject, formElementEdit);
@@ -91,9 +96,10 @@ const editPopup = new PopupWithForm('.popup_type_edit', (submitCallback) => {
   api.editProfile(submitCallback.popup__name, submitCallback.popup__occupation)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
-    })
-    .finally(() => {
       editPopup.close()
+    })
+    .catch(console.log)
+    .finally(() => {
       editPopup.setButtonText('Сохранить')
     })
 });
@@ -102,10 +108,11 @@ const imagePopup = new PopupWithForm('.popup_type_image', (formData) => {
   imagePopup.setButtonText('Сохранение...')
   api.addCard(formData.popup__place, formData.popup__url)
     .then(res => {
-      createCard(res)
-    })
-    .finally(() => {
+      cardsContainer.addItem(createCard(res));
       imagePopup.close()
+    })
+    .catch(console.log)
+    .finally(() => {
       imagePopup.setButtonText('Сохранить')
     })
 })
@@ -115,9 +122,10 @@ const avatarPopup = new PopupWithForm('.popup_type_avatar', (submitCallback) => 
   api.editAvatar(submitCallback.popup__url)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
-    })
-    .finally(() => {
       avatarPopup.close()
+    })
+    .catch(console.log)
+    .finally(() => {
       avatarPopup.setButtonText('Сохранить')
     })
 })
@@ -134,9 +142,8 @@ deletePopup.setEventListeners();
 avatarPopup.setEventListeners();
 
 const cardsContainer = new Section({
-  items: [],
   renderer: (item) => {
-    createCard(item)
+    cardsContainer.addItem(createCard(item));
   }
 }, elements);
 
@@ -151,17 +158,13 @@ function openPopupEdit() {
 
 function openPopupImage() {
   imagePopup.open();
-  formElementImage.reset();
   imageAddValidator.resetValidation();
 }
 
 function openPopupAvatar() {
   avatarPopup.open();
-  formElementAvatar.reset();
   avatarEditValidator.resetValidation();
 }
-
-cardsContainer.renderItems();
 
 buttonEdit.addEventListener('click', openPopupEdit);
 buttonAdd.addEventListener('click', openPopupImage);
