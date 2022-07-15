@@ -1,4 +1,4 @@
-# Проект: Mesto
+# Название: Mesto
 
 ---
 
@@ -36,5 +36,7 @@
 ---
 
 **GitHub Pages**
+
+Открыть и посмотреть проект можно по ссылке:
 
 [Ссылка :)](https://sergeishabanov1989.github.io/mesto/)
